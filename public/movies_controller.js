@@ -74,6 +74,7 @@ app.controller('moviesController', ['$scope','moviesService','$window' , functio
           for(var i = 0; i < 2; i++){
           moviesOptions[i] = moviesService.getRandMovie();
           }
+          $scope.actorModel = "";
         });
       })
     }
@@ -97,7 +98,7 @@ app.controller('moviesController', ['$scope','moviesService','$window' , functio
       $scope.customS = false;
       //moviesService.emptyMoviesPull();
       $scope.selctedMovie = moviesOptions[0];
-      moviesOptions = [];
+      // moviesOptions = [];
 
       //$window.alert('Thats it !!!');
     }
