@@ -54,10 +54,22 @@
       </div> <!-- row closer -->
     </div> <!-- container closer -->
   </div>
-   <!--  <hr> DISPLAY SECTION -->
 
+   
+  <div class="container" ng-hide="customS">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="col-md-6 col-md-offset-3 selected-movi-item"  ng-model="selctedMovie">
+             <img class="movie-image img-thumbnail" src="{{selctedMovie.img}}">
+             <h2 class="title">{{selctedMovie.title}}</h2>
+             <h3 class="genre">Genre: {{selctedMovie.genre}}</h3>
+             <h3 class="overview">Description: {{selctedMovie.overview}}</h3>
+          </div> <!-- col 4 closer -->
+        </div> <!-- col 12 closer -->
+      </div> <!-- row closer -->
+    </div> <!-- container closer -->
 
-    <div class="container">
+    <div class="container" ng-hide="customM">
       <div class="row">
         <div class="col-md-12">
           <div class="col-md-4 col-md-offset-1 movi-item" ng-repeat="movie in suggestedMovies track by $index" id="scrollHere">
@@ -66,7 +78,7 @@
              <h3 class="genre">Genre: {{movie.genre}}</h3>
              <h3 class="overview">Description: {{movie.overview}}</h3>
             <button type="button" class="btn btn-link pull-right" ng-click="btnRemove(movie)"><i class="fa fa-times fa-4x" aria-hidden="true"></i></button>
-            <button type="button" class="btn btn-link pull-left" ng-clck="placeholder"><i class="fa fa-check fa-4x" aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-link pull-left" ng-click="btnChoose(movie)"><i class="fa fa-check fa-4x" aria-hidden="true"></i></button>
           </div> <!-- col 4 closer -->
         </div> <!-- col 12 closer -->
       </div> <!-- row closer -->

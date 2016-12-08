@@ -25,6 +25,10 @@ app.controller('moviesController', ['$scope','moviesService','$window' , functio
 
   $scope.customA = true;
 
+  $scope.customS = true;
+
+  $scope.customM = false;
+
   var moviesOptions = [];
 
   moviesService.getGenreList().then(function () {
@@ -47,13 +51,18 @@ app.controller('moviesController', ['$scope','moviesService','$window' , functio
 
   $scope.btnRand = function(){
 
+    $scope.customM = false;
+    $scope.customS = true;
     moviesService.emptyMoviesPull();
     //moviesOptions = [];
 
 
     if($scope.actorModel == ""){ //Getting movies by Genre
       moviesService.getMoviesByGenre($scope.selectedGenre).then(function () {
-
+        if($scope.selectedGenre.name == "Select Genre"){
+          alert("Please Select Genre");
+          return;
+        }
         for(var i = 0; i < 2; i++){
           moviesOptions[i] = moviesService.getRandMovie();
         }
@@ -82,9 +91,22 @@ app.controller('moviesController', ['$scope','moviesService','$window' , functio
     if (temp){
       moviesOptions[moviesOptions.indexOf(movie)] = temp;
     }else{
-      $window.alert('Thats it !!!');
+      moviesOptions.splice(moviesOptions.indexOf(movie),1);
+
+      $scope.customM = true;
+      $scope.customS = false;
+      //moviesService.emptyMoviesPull();
+      $scope.selctedMovie = moviesOptions[0];
+      moviesOptions = [];
+
+      //$window.alert('Thats it !!!');
     }
   };
-
+  $scope.btnChoose = function(movie){
+    $scope.customM = true;
+    $scope.customS = false;
+    moviesService.emptyMoviesPull();
+    $scope.selctedMovie =  movie;
+  }
 
 }]);
