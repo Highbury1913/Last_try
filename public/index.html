@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="node_modules\bootstrap\dist\css\bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules\font-awesome\css\font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Maor is the Champ!</title>
+  </head>
+  <body ng-app="JasonsMoviesApp" ng-controller="moviesController" >
+
+
+    <div class="container navbar"> <!-- NAVBAR SECTION -->
+        <div class="row">
+          <div class="col-md-10 col-md-offset-1" ng-model="placeholder">
+            <div class="btn-group">
+
+              <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Randomize By
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2" ng-model="selectedSerchBy">
+                  <li> <button type="button" class="btn btn-link Rgenre" ng-click="makeShowG()">Genre</button></li>
+                  <li> <button type="button" class="btn btn-link Ractor" ng-click="makeShowA()">Actor</button></li>
+                </ul>
+              </div>
+
+              <div class="dropdownGenre" ng-hide="customG">
+                <select class="btn btn-primary dropdown-toggle" ng-options="item as item.name for item in genreOptions track by item.id" ng-model="selectedGenre" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></select>
+              </div> <!-- dropdown genre closer -->
+
+              <form class="actor_input" ng-hide="customA">
+                <input type="text" name="actor_search" placeholder="Actors" ng-model="actorModel">
+              </form>
+            </div> <!-- btn-group closer -->
+          </div> <!-- col closer -->
+        </div> <!-- row closer -->
+      </div> <!-- container closer -->
+
+        <hr>  <!--<hr> BIG RED BUTTON SECTION -->
+
+  <div class="button_section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-2 col-md-offset-4">
+          <h1 class="main_head">RANDOMIZE</h1>
+          <button type="button" class="btn btn-link" ng-click="btnRand()" ng-model="randButton">
+            <a href="javascript:void(0);">
+              <img class="btn-img" src="http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/glossy-black-icons-sports-hobbies/044485-glossy-black-icon-sports-hobbies-film-reel.png">
+            </a>
+          </button>
+        </div> <!-- col closer -->
+      </div> <!-- row closer -->
+    </div> <!-- container closer -->
+  </div>
+   <!--  <hr> DISPLAY SECTION -->
+
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="col-md-4 col-md-offset-1 movi-item" ng-repeat="movie in suggestedMovies track by $index" id="scrollHere">
+             <img class="movie-image img-thumbnail" src="{{movie.img}}">
+             <h2 class="title">{{movie.title}}</h2>
+             <h3 class="genre">Genre: {{movie.genre}}</h3>
+             <h3 class="overview">Description: {{movie.overview}}</h3>
+            <button type="button" class="btn btn-link pull-right" ng-click="btnRemove(movie)"><i class="fa fa-times fa-4x" aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-link pull-left" ng-clck="placeholder"><i class="fa fa-check fa-4x" aria-hidden="true"></i></button>
+          </div> <!-- col 4 closer -->
+        </div> <!-- col 12 closer -->
+      </div> <!-- row closer -->
+    </div> <!-- container closer -->
+
+
+    <script type="text/javascript" src="node_modules\jquery\dist\jquery.min.js"></script>
+    <script type="text/javascript" src="node_modules\bootstrap\dist\js\bootstrap.min.js"></script>
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <!-- <script src="app.js"></script> -->
+    <script src="movies_service.js"></script>
+    <script src="movies_controller.js"></script>
+  </body>
+</html>
