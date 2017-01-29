@@ -1,4 +1,4 @@
-
+//
 /*********include****************/
 
 var express = require('express');
@@ -21,6 +21,11 @@ app.use(bodyParser.urlencoded({extended: false}));
 // app.set('view engine', 'ejs');
 
 
+/**************side functions*******************/
+
+var getRandomPageNum = function(n){
+  return Math.floor((Math.random() * n) + 1);
+};
 
 /***************Vars*******************/
 
@@ -73,7 +78,8 @@ app.get('/genre', function (req, res) {
 //Sending list of movies by genre id
 app.get('/moviesByGenre:genreId', function (req, res) {
   var genre = req.params.genreId;
-  request(getMoviesByGenreUrl + genre, function (error, response, body) {
+  var pageNum = "&page=" + getRandomPageNum(100);
+  request(getMoviesByGenreUrl + genre + pageNum, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       res.send(body)
     }
@@ -95,7 +101,15 @@ app.get('/moviesByActor:actorId', function (req, res) {
   var actor = req.params.actorId;
   request(getMoviesByActorIdUrl + actor, function (error, response, body) {
     if (!error && response.statusCode == 200) {
-      res.send(body)
+      var tempo = JSON.parse(body);
+      var pageNumRandAct = tempo.total_pages - 1;
+      var takeFromPage = getRandomPageNum(pageNumRandAct);
+      request(getMoviesByActorIdUrl + actor + "&page=" + takeFromPage, function (error, response, body) {
+
+        if (!error && response.statusCode == 200) {
+          res.send(body)
+        }
+      })
     }
   })
 });

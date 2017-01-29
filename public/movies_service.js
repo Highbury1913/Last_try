@@ -14,7 +14,7 @@
   //   {label: 'Comedy', id: 3},
   //   {label: 'ChickFlick', id: 4}
   //   ];
-
+//
     var dummyPG = [
       {label: "Select PG Rating", id: 0},
       {label: "PG", id: 1},
@@ -87,8 +87,10 @@ app.factory('moviesService', ['$http', function ($http) {
      return $http.get('/moviesByGenre' + genre.id).success(function (data) {
 
       var tempMovieList = [];
+      var i = Math.floor((Math.random() * 10));
+      var length = i + 9;
       angular.copy(data.results, tempMovieList);
-      for(var i =0; i < tempMovieList.length; i++){
+      for(i; i < length ; i++){
         movies.moviesPull.push(
           {
             title: tempMovieList[i].title,
@@ -105,18 +107,25 @@ app.factory('moviesService', ['$http', function ($http) {
 
     return $http.get('/actor' + actorName).success(function (data) {
       movies.actor = {name: actorName, id: data.results[0].id};
-
     });
   };
 
+  // movies.getActorPageCount = function(actorId){
+  //   return $http.get('/moviesByActor' + actorId).success(function (data){
+  //     var pageCount = data.total_pages - 1;
+  //     console.log(data);
+  //     console.log(pageCount);
+  //   });
+  // };
+
   //Ask for list of movies by actor id
   movies.getMoviesByActor = function(actorId){
-
     return $http.get('/moviesByActor' + actorId).success(function (data) {
-
       var tempMovieList = [];
+      var i = Math.floor((Math.random() * 10));
+      var length = i + 9;
       angular.copy(data.results, tempMovieList);
-      for(var i =0; i < tempMovieList.length ; i++){
+      for(i; i < length ; i++){
       var currentGenre = movies.getGenreById(tempMovieList[i].genre_ids[0]);
 
         movies.moviesPull.push(

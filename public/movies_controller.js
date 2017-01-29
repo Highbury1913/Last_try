@@ -9,7 +9,7 @@
 //         $scope.showSpinner();
 //     }
 // });
-
+//
 // $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
 //     if (toState.resolve) {
 //         $scope.hideSpinner();
